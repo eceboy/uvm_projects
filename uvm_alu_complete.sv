@@ -16,8 +16,8 @@ class data_transaction extends uvm_sequence_item;
 
     // Constructor
     function new(string name = "");
-        super.new(name); // this is not really needed but helps make code more readable. If not present
-                         // then compiler will insert it automatically with NO arguments
+        super.new(name); // super call is not really needed but helps make code more readable. If not present
+                         // then compiler will insert super.new call automatically with NO arguments
     endfunction
 
     `uvm_object_utils(data_transaction);
@@ -32,6 +32,7 @@ class data_transaction extends uvm_sequence_item;
     endfunction : randomize_custom
 
     // Copy function since we arent using the field automation macros
+    // Creates a deep copy of the function passed in
     virtual function void do_copy(uvm_object rhs);
         data_transaction RHS;
         super.do_copy(rhs);
@@ -200,6 +201,7 @@ endclass : result_monitor
 * SUBSCRIBER(S) 
 ***********************************************/
 class alu_printer extends uvm_subscriber #(data_transaction);
+    // Register agent with the factory
     `uvm_component_utils(alu_printer)
 
     
